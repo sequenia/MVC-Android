@@ -1,8 +1,10 @@
-package com.sequenia.mvc;
+package com.sequenia.mvc.fragments;
 
 import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
+
+import com.sequenia.mvc.views.AppView;
 
 /**
  * Базовый класс для всех фрагментов в приложении.

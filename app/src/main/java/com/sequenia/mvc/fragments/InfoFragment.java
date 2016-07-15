@@ -1,4 +1,4 @@
-package com.sequenia.mvc;
+package com.sequenia.mvc.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.sequenia.mvc.objects.Info;
+import com.sequenia.mvc.views.InfoView;
+import com.sequenia.mvc.controllers.MainViewController;
+import com.sequenia.mvc.R;
 
 /**
  * Фрагмент главного экрана. Создан для сохранения состояния.
@@ -24,7 +29,7 @@ import android.widget.TextView;
  * Created by chybakut2004 on 14.07.16.
  */
 
-public class MainActivityFragment extends AppFragment implements MainView {
+public class InfoFragment extends AppFragment implements InfoView {
 
     // Текстовые поля для отображения загруженных данных
     private TextView firstNameTextView;
@@ -54,7 +59,7 @@ public class MainActivityFragment extends AppFragment implements MainView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Инициализация разметки и сохранение ссылок на виджеты. Обработка нажатий по кнопке
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
 
         firstNameTextView = (TextView) view.findViewById(R.id.first_name);
         lastNameTextView = (TextView) view.findViewById(R.id.last_name);

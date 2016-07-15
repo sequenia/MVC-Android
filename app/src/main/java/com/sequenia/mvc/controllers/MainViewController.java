@@ -1,5 +1,9 @@
-package com.sequenia.mvc;
+package com.sequenia.mvc.controllers;
 
+import com.sequenia.mvc.models.InfoModel;
+import com.sequenia.mvc.views.InfoView;
+import com.sequenia.mvc.models.TestInfoModel;
+import com.sequenia.mvc.objects.Info;
 import com.sequenia.sequeniamvc.ControllerWithView;
 import com.sequenia.sequeniamvc.MVC;
 
@@ -13,7 +17,7 @@ import com.sequenia.sequeniamvc.MVC;
  * Created by chybakut2004 on 14.07.16.
  */
 
-public class MainViewController extends ControllerWithView<MainView> {
+public class MainViewController extends ControllerWithView<InfoView> {
 
     private InfoModel infoModel;    // Ссылка на модель, через которую идет получение данных.
 
@@ -39,7 +43,7 @@ public class MainViewController extends ControllerWithView<MainView> {
     }
 
     @Override
-    public void onTakeView(MainView view, boolean firstTime) {
+    public void onTakeView(InfoView view, boolean firstTime) {
         super.onTakeView(view, firstTime);
 
         // Здесь контроллер получает ссылку на экран.

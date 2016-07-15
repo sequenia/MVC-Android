@@ -1,4 +1,6 @@
-package com.sequenia.mvc;
+package com.sequenia.mvc.objects;
+
+import java.util.Locale;
 
 /**
  * Информация, отображаемая на главном экране.
@@ -30,5 +32,13 @@ public class Info {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFullInfo() {
+        return String.format(
+                Locale.US,
+                "%s %s",
+                firstName == null ? "" : firstName, lastName == null ? "" : lastName
+        );
     }
 }

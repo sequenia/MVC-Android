@@ -1,4 +1,4 @@
-package com.sequenia.mvc;
+package com.sequenia.mvc.views;
 
 import com.sequenia.sequeniamvc.MVC;
 

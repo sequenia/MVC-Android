@@ -1,4 +1,7 @@
-package com.sequenia.mvc;
+package com.sequenia.mvc.views;
+
+import com.sequenia.mvc.objects.Info;
+import com.sequenia.mvc.views.AppView;
 
 /**
  * Интерфейс описывает операции, которые может выполнять главный экран приложения.
@@ -9,7 +12,7 @@ package com.sequenia.mvc;
  * Created by chybakut2004 on 14.07.16.
  */
 
-public interface MainView extends AppView {
+public interface InfoView extends AppView {
 
     /**
      * Показывает информацию на экране.
