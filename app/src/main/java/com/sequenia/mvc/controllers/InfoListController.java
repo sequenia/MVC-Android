@@ -10,6 +10,12 @@ import com.sequenia.sequeniamvc.SimpleListController;
 import java.util.List;
 
 /**
+ * Контроллер для списка с информацией.
+ *
+ * Унаследован от контроллера для списка чего-либо.
+ *
+ * Здесь указан лишь метод для загрузки данных.
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 

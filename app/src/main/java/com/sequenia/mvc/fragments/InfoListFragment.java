@@ -19,17 +19,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Экран со списком.
+ *
+ * Здесь определено, каким образом список отображается на экране.
+ *
+ * Логика загрузки данных находится в контроллере.
+ *
+ * На экране есть:
+ * - Список
+ * - Пустой экран, если пришедший список пустой
+ * - Кнопка обновления
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 
 public class InfoListFragment extends AppFragment implements InfoListView {
 
-    private RecyclerView recyclerView;
-    private View loadingView;
-    private View emptyScreen;
-    private Button refreshButton;
+    private RecyclerView recyclerView; // Список
+    private View loadingView;          // View с индикатором загрузки
+    private View emptyScreen;          // View с сообщением, что список пустой
+    private Button refreshButton;      // Кнопка обновления
 
-    private ListAdapter adapter;
+    private ListAdapter adapter;       // Адаптер для отображения элементов
 
     private InfoListController<InfoListView> controller;
 

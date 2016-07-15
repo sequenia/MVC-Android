@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.sequenia.mvc.R;
 
 /**
- * Главный экран
+ * Главный экран. Тут есть кнопки для открытия конкретных примеров
  */
 public class MainActivity extends AppCompatActivity {
 

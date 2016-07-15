@@ -10,6 +10,10 @@ import com.sequenia.mvc.R;
 import com.sequenia.mvc.fragments.InfoFragment;
 
 /**
+ * Экран с какой-то информацией
+ *
+ * Внешний вид и логика находится во фрагменте, в котором выставлен setRetainInstance(true)
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 

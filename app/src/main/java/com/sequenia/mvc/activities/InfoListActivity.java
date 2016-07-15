@@ -10,6 +10,10 @@ import com.sequenia.mvc.R;
 import com.sequenia.mvc.fragments.InfoListFragment;
 
 /**
+ * Экран со списоком.
+ *
+ * Все зашито во фрагмент, смотрите его.
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 
