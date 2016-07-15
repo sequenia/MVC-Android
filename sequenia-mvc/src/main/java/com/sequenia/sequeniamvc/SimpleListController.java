@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Реализация контроллера для списка элементов.
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 
 public abstract class SimpleListController<O, T extends ListView<O>> extends ControllerWithView<T>
         implements ListController<O, T> {
 
-    private List<O> items;
-    private boolean loading;
-    private boolean hideList;
+    private List<O> items;    // Список элеменов
+    private boolean loading;  // Индикатор загрузки
+    private boolean hideList; // Флаг, показывающий, нужно ли отображать индикатор при начале загрузки
 
     public SimpleListController() {
         loading = false;
@@ -43,15 +45,22 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
 
     @Override
     public void loadData(boolean hideList) {
+        // Перед загрузкой данных нужно запомнить, что идет загрузка,
+        // а так же указать, нужно ли показывать индикатор загрузки.
+        // Его не нужно показывать при фоновой загрузке.
         this.hideList = hideList;
         this.loading = true;
+
+        // Показ индикатора загрузки, если необходимо
         showLoading(hideList);
 
+        // Загрузка данных
         loadList();
     }
 
     @Override
     public void onListLoaded(List<O> list) {
+        // После успешной загрузки нужно отобразить данные и запомнить, что загрузка кончилась.
         loading = false;
         this.items = list;
         showData();
@@ -59,6 +68,7 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
 
     @Override
     public void onListLoadingError() {
+        // При ошибке загрузки нужно указать, что она законилась.
         loading = false;
         if(isViewAttached()) {
             getView().setLoadingVisibility(false);

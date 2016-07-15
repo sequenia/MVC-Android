@@ -1,7 +1,7 @@
 package com.sequenia.sequeniamvc;
 
 /**
- * Главные интерфейсы для MVC
+ * Главные интерфейсы для MVC<br/>
  * Created by chybakut2004 on 14.07.16.
  */
 
@@ -19,21 +19,21 @@ public interface MVC {
     }
 
     /**
-     * Controller - объект, в котором заложена логика экрана
-     * (Выполнение http запросов, бизнес-логика)
-     *
-     * T - Уточнение View, которым оперирует Controller.
-     * Нужно для доступности всех методов View из Controller
-     *
-     * ВНИМАНИЕ: Объект Controller нужно сохранить после пересоздания экрана.
-     * Самый легкий способ - использовать фрагменты с setRetainInstance(true).
+     * Controller - объект, в котором заложена логика экрана<br/>
+     * (Выполнение http запросов, бизнес-логика)<br/>
+     * <br/>
+     * T - Уточнение View, которым оперирует Controller.<br/>
+     * Нужно для доступности всех методов View из Controller<br/>
+     * <br/>
+     * ВНИМАНИЕ: Объект Controller нужно сохранить после пересоздания экрана.<br/>
+     * Самый легкий способ - использовать фрагменты с setRetainInstance(true).<br/>
      */
     interface Controller<T extends View> {
 
         /**
-         * Получает View и сохраняет ссылку на нее
+         * Получает View и сохраняет ссылку на нее<br/>
          * @param view view
-         * @param firstTime true, если экран создан первы раз
+         * @param firstTime true, если экран создан первы раз<br/>
          *                  false, если экран пересоздан (например, в результате поворота)
          */
         void onTakeView(T view, boolean firstTime);
@@ -60,17 +60,20 @@ public interface MVC {
     }
 
     /**
-     * Model - объект, через который можно получить данные
+     * Model - объект, через который можно получить данные<br/>
      * (Например, из SharedPreferences или через http запросы)
      */
     interface Model {
 
         // Все методы определяются в зависимости от конкретной Model
 
+        /**
+         * Класс ошибки при загрузке данных в модели
+         */
         class ModelError {
 
-            private int code;
-            private String message;
+            private int code;        // Код ошибки
+            private String message;  // Сообщение об ошибке
 
             public ModelError(int code, String message) {
                 this.code = code;
@@ -94,6 +97,9 @@ public interface MVC {
             }
         }
 
+        /**
+         * Коллбэк при ошибке во время обращения к модели
+         */
         interface ModelErrorListener {
             void onError(ModelError error);
         }
