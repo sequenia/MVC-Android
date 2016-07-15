@@ -67,9 +67,9 @@ public class TestInfoModel implements InfoModel {
             @Override
             public void run() {
                 List<Info> infoList = new ArrayList<>();
-                /*for(int i = 0; i < 5; i++) {
+                for(int i = 0; i < 5; i++) {
                     infoList.add(new Info("Имя " + i, "Фамилия " + i));
-                }*/
+                }
                 infoListListener.onInfoListLoaded(infoList);
             }
         }, 5000);
