@@ -5,26 +5,22 @@ import com.sequenia.mvc.models.TestInfoModel;
 import com.sequenia.mvc.objects.Info;
 import com.sequenia.mvc.views.InfoListView;
 import com.sequenia.sequeniamvc.MVC;
-import com.sequenia.sequeniamvc.SimpleListController;
+import com.sequenia.sequeniamvc.SimpleListWithCacheController;
 
 import java.util.List;
 
 /**
- * Контроллер для списка с информацией.
- *
- * Унаследован от контроллера для списка чего-либо.
- *
- * Здесь указан лишь метод для загрузки данных.
- *
+ * Контроллер для списка с отображением закешированных данных при старте
+ * 
  * Created by chybakut2004 on 15.07.16.
  */
 
-public class InfoListController<T extends InfoListView> extends SimpleListController<Info, T> {
+public class InfoListWithCacheController<T extends InfoListView> extends SimpleListWithCacheController<Info, T> {
 
     private InfoModel infoModel;
     private int tryIndex;
 
-    public InfoListController() {
+    public InfoListWithCacheController() {
         this.infoModel = new TestInfoModel();
         this.tryIndex = 0;
     }
@@ -33,7 +29,7 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
     public void onTakeView(T view, boolean firstTime) {
         super.onTakeView(view, firstTime);
 
-        getView().setRefreshButtonEnabled(!isLoading());
+        getView().setRefreshButtonEnabled(!isLoading() && dataFromCacheLoaded());
     }
 
     @Override
@@ -42,12 +38,11 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
         infoModel.getInfoList(tryIndex, new InfoModel.InfoListListener() {
             @Override
             public void onInfoListLoaded(List<Info> infoList) {
-                tryIndex += 1;onListLoaded(infoList);
+                tryIndex += 1;
                 if(isViewAttached()) {
                     getView().setRefreshButtonEnabled(true);
                 }
-
-
+                onListLoaded(infoList);
             }
         }, new MVC.Model.ModelErrorListener() {
             @Override
@@ -58,6 +53,20 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
                     getView().showMessage("Ошибка");
                 }
                 onListLoadingError();
+            }
+        });
+    }
+
+    @Override
+    public void loadListFromCache() {
+        getView().setRefreshButtonEnabled(false);
+        infoModel.getInfoListFromCache(new InfoModel.InfoListListener() {
+            @Override
+            public void onInfoListLoaded(List<Info> infoList) {
+                if(isViewAttached()) {
+                    getView().setRefreshButtonEnabled(true);
+                }
+                onListFromCacheLoaded(infoList);
             }
         });
     }

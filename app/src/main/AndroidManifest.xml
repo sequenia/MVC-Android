@@ -23,6 +23,9 @@
         <activity android:name=".activities.InfoListActivity">
         </activity>
 
+        <activity android:name=".activities.InfoListWithCacheActivity">
+        </activity>
+
     </application>
 
 </manifest>

@@ -18,9 +18,9 @@ import java.util.List;
 public abstract class SimpleListController<O, T extends ListView<O>> extends ControllerWithView<T>
         implements ListController<O, T> {
 
-    private List<O> items;    // Список элеменов
-    private boolean loading;  // Индикатор загрузки
-    private boolean hideList; // Флаг, показывающий, нужно ли отображать индикатор при начале загрузки
+    protected List<O> items;    // Список элеменов
+    protected boolean loading;  // Индикатор загрузки
+    protected boolean hideList; // Флаг, показывающий, нужно ли отображать индикатор при начале загрузки
 
     public SimpleListController() {
         loading = false;
@@ -31,22 +31,43 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
     public void onTakeView(T view, boolean firstTime) {
         super.onTakeView(view, firstTime);
 
-        // Скрыть все на экране.
-        // Дальнейшая настройка пойдет в зависимости от сохраненных данных
-        getView().setListVisibility(false);
-        getView().setEmptyScreenVisibility(false);
-        getView().setLoadingVisibility(false);
+        resetView();
+        showDataOnTakeView();
+    }
 
-        // Показать данные, если они уже есть
-        showData();
+    /**
+     * Показ данных при открытии экрана и начало загрузки данных
+     */
+    protected void showDataOnTakeView() {
+        // Показать данные, если они уже есть.
+        // true означает, что нужно показывать пустой экран, если данные уже есть
+        showData(true);
+        // Начать загрузу данных
+        loadDataOnTakeView();
+    }
 
+    /**
+     * Загрузка данных при открытии экрана
+     */
+    protected void loadDataOnTakeView() {
         if(loading) {
             // Если идет загрузка - нужно ее показать
             showLoading(hideList);
         } else {
             // Если загрузка не идет - нужно начать новую.
+            // Если данные уже есть, то индикатор загрузки не показывается (передается false).
+            // Если передать true, то индкатор загрузки будет показан в любом случае.
             loadData(false);
         }
+    }
+
+    /**
+     * Скрывает все на экране
+     */
+    protected void resetView() {
+        getView().setListVisibility(false);
+        getView().setEmptyScreenVisibility(false);
+        getView().setLoadingVisibility(false);
     }
 
     @Override
@@ -69,7 +90,7 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
         // После успешной загрузки нужно отобразить данные и запомнить, что загрузка кончилась.
         loading = false;
         this.items = list;
-        showData();
+        showData(true);
     }
 
     @Override
@@ -81,7 +102,11 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
         }
     }
 
-    private void showData() {
+    /**
+     * Отображает данные на экране
+     * @param needsShowEmptyScreen нужно ли показывать пустой экран, если пришел пустой список
+     */
+    protected void showData(boolean needsShowEmptyScreen) {
         if(isViewAttached()) {
             // Нужно все скрыть, если данных нет,
             // Показать пустой экран, если данные есть, но список пустой,
@@ -90,7 +115,7 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
                 getView().setList(new ArrayList<O>());
                 getView().setListVisibility(false);
                 getView().setEmptyScreenVisibility(false);
-            } else if (items.size() == 0) {
+            } else if (items.size() == 0 && needsShowEmptyScreen) {
                 getView().setList(items);
                 getView().setListVisibility(false);
                 getView().setEmptyScreenVisibility(true);
@@ -105,7 +130,7 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
         }
     }
 
-    private void showLoading(boolean hideList) {
+    protected void showLoading(boolean hideList) {
         if(isViewAttached()) {
             // Показывать индикатор загрузки нужно только если:
             // - сказано об этом или

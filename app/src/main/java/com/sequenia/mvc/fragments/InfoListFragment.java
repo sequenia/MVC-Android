@@ -14,6 +14,7 @@ import com.sequenia.mvc.R;
 import com.sequenia.mvc.controllers.InfoListController;
 import com.sequenia.mvc.objects.Info;
 import com.sequenia.mvc.views.InfoListView;
+import com.sequenia.sequeniamvc.ListController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class InfoListFragment extends AppFragment implements InfoListView {
 
     private ListAdapter adapter;       // Адаптер для отображения элементов
 
-    private InfoListController<InfoListView> controller;
+    private ListController<Info, InfoListView> controller;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +51,11 @@ public class InfoListFragment extends AppFragment implements InfoListView {
 
         setRetainInstance(true);
 
-        controller = new InfoListController<>();
+        controller = createController();
+    }
+
+    protected ListController<Info, InfoListView> createController() {
+        return new InfoListController<>();
     }
 
     @Nullable

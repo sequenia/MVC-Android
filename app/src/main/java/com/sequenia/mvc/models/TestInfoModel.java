@@ -60,4 +60,18 @@ public class TestInfoModel implements InfoModel {
             }
         }, 5000);
     }
+
+    @Override
+    public void getInfoListFromCache(final InfoListListener infoListListener) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<Info> infoList = new ArrayList<>();
+                /*for(int i = 0; i < 5; i++) {
+                    infoList.add(new Info("Имя " + i, "Фамилия " + i));
+                }*/
+                infoListListener.onInfoListLoaded(infoList);
+            }
+        }, 5000);
+    }
 }

@@ -39,5 +39,15 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        Button infoListWithCache = (Button) findViewById(R.id.info_list_with_cache);
+        if(infoListWithCache != null) {
+            infoListWithCache.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(MainActivity.this, InfoListWithCacheActivity.class));
+                }
+            });
+        }
+
     }
 }

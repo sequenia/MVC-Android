@@ -15,6 +15,8 @@ public interface InfoModel {
 
     void getInfoList(int tryIndex, InfoListListener infoListListener, MVC.Model.ModelErrorListener errorListener);
 
+    void getInfoListFromCache(InfoListListener infoListListener);
+
     interface InfoListListener {
         void onInfoListLoaded(List<Info> infoList);
     }
