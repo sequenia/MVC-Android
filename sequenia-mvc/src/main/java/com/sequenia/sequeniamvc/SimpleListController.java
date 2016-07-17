@@ -15,7 +15,7 @@ import java.util.List;
  * Created by chybakut2004 on 15.07.16.
  */
 
-public abstract class SimpleListController<O, T extends ListView<O>> extends ControllerWithView<T>
+public abstract class SimpleListController<O, T extends MVC.View> extends ControllerWithView<T>
         implements ListController<O, T> {
 
     protected List<O> items;    // Список элеменов
@@ -65,9 +65,9 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
      * Скрывает все на экране
      */
     protected void resetView() {
-        getView().setListVisibility(false);
-        getView().setEmptyScreenVisibility(false);
-        getView().setLoadingVisibility(false);
+        setListVisibility(false);
+        setEmptyScreenVisibility(false);
+        setLoadingVisibility(false);
     }
 
     @Override
@@ -98,7 +98,7 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
         // При ошибке загрузки нужно указать, что она законилась.
         loading = false;
         if(isViewAttached()) {
-            getView().setLoadingVisibility(false);
+            setLoadingVisibility(false);
         }
     }
 
@@ -112,21 +112,21 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
             // Показать пустой экран, если данные есть, но список пустой,
             // Показать список, если он не пустой
             if (items == null) {
-                getView().setList(new ArrayList<O>());
-                getView().setListVisibility(false);
-                getView().setEmptyScreenVisibility(false);
+                showList(new ArrayList<O>());
+                setListVisibility(false);
+                setEmptyScreenVisibility(false);
             } else if (items.size() == 0 && needsShowEmptyScreen) {
-                getView().setList(items);
-                getView().setListVisibility(false);
-                getView().setEmptyScreenVisibility(true);
+                showList(items);
+                setListVisibility(false);
+                setEmptyScreenVisibility(true);
             } else {
-                getView().setList(items);
-                getView().setListVisibility(true);
-                getView().setEmptyScreenVisibility(false);
+                showList(items);
+                setListVisibility(true);
+                setEmptyScreenVisibility(false);
             }
 
             // Если показали данные - нужно скрыть загрузку
-            getView().setLoadingVisibility(false);
+            setLoadingVisibility(false);
         }
     }
 
@@ -138,9 +138,9 @@ public abstract class SimpleListController<O, T extends ListView<O>> extends Con
 
             // Если какие-то данные уже есть, загрузка должна проходить в фоне
             if (hideList || items == null) {
-                getView().setListVisibility(false);
-                getView().setEmptyScreenVisibility(false);
-                getView().setLoadingVisibility(true);
+                setListVisibility(false);
+                setEmptyScreenVisibility(false);
+                setLoadingVisibility(true);
             }
         }
     }

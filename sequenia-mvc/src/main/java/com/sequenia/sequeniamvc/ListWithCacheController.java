@@ -6,7 +6,7 @@ import java.util.List;
  * Created by chybakut2004 on 15.07.16.
  */
 
-public interface ListWithCacheController<O, T extends ListView<O>> extends ListController<O, T> {
+public interface ListWithCacheController<O, T extends MVC.View> extends ListController<O, T> {
 
     /**
      * Здесь нужно реализовать доставание данных из кеша

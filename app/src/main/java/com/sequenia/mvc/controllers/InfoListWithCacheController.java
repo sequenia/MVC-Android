@@ -57,6 +57,7 @@ public class InfoListWithCacheController<T extends InfoListView> extends SimpleL
         });
     }
 
+
     @Override
     public void loadListFromCache() {
         getView().setRefreshButtonEnabled(false);
@@ -69,5 +70,25 @@ public class InfoListWithCacheController<T extends InfoListView> extends SimpleL
                 onListFromCacheLoaded(infoList);
             }
         });
+    }
+
+    @Override
+    public void showList(List<Info> items) {
+        getView().setList(items);
+    }
+
+    @Override
+    public void setListVisibility(boolean visibility) {
+        getView().setListVisibility(visibility);
+    }
+
+    @Override
+    public void setLoadingVisibility(boolean visibility) {
+        getView().setLoadingVisibility(visibility);
+    }
+
+    @Override
+    public void setEmptyScreenVisibility(boolean visibility) {
+        getView().setEmptyScreenVisibility(visibility);
     }
 }

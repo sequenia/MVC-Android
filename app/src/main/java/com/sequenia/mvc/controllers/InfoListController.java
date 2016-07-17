@@ -65,4 +65,24 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
             }
         });
     }
+
+    @Override
+    public void showList(List<Info> items) {
+        getView().setList(items);
+    }
+
+    @Override
+    public void setListVisibility(boolean visibility) {
+        getView().setListVisibility(visibility);
+    }
+
+    @Override
+    public void setLoadingVisibility(boolean visibility) {
+        getView().setLoadingVisibility(visibility);
+    }
+
+    @Override
+    public void setEmptyScreenVisibility(boolean visibility) {
+        getView().setEmptyScreenVisibility(visibility);
+    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by chybakut2004 on 15.07.16.
  */
 
-public abstract class SimpleListWithCacheController<O, T extends ListView<O>> extends SimpleListController<O, T>
+public abstract class SimpleListWithCacheController<O, T extends MVC.View> extends SimpleListController<O, T>
             implements ListWithCacheController<O, T> {
 
     private boolean dataFromCacheLoaded;

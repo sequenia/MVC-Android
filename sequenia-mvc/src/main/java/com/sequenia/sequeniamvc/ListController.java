@@ -11,7 +11,7 @@ import java.util.List;
  * Created by chybakut2004 on 15.07.16.
  */
 
-public interface ListController<O, T extends ListView<O>> extends MVC.Controller<T> {
+public interface ListController<O, T extends MVC.View> extends MVC.Controller<T> {
 
     /**
      * Загружает список с данными<br/>
@@ -41,4 +41,12 @@ public interface ListController<O, T extends ListView<O>> extends MVC.Controller
      * @return true, если идет загрузка
      */
     boolean isLoading();
+
+    void showList(List<O> items);
+
+    void setListVisibility(boolean visibility);
+
+    void setLoadingVisibility(boolean visibility);
+
+    void setEmptyScreenVisibility(boolean visibility);
 }
