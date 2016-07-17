@@ -3,6 +3,8 @@ package com.sequenia.sequeniamvc;
 import java.util.List;
 
 /**
+ * Реализация контроллера для списка с кешированием
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 

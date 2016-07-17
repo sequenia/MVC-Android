@@ -16,6 +16,11 @@ import java.util.List;
  *
  * Здесь указан лишь метод для загрузки данных.
  *
+ * Все остальное происходит автоматически:
+ * - Восстановление экрана после пересоздания
+ * - Фоновое обновление данных при пересоздании
+ * - Если загрузка данных началась, а экран пересоздался, данные повторно не грузятся.
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 
@@ -42,12 +47,11 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
         infoModel.getInfoList(tryIndex, new InfoModel.InfoListListener() {
             @Override
             public void onInfoListLoaded(List<Info> infoList) {
-                tryIndex += 1;onListLoaded(infoList);
+                tryIndex += 1;
                 if(isViewAttached()) {
                     getView().setRefreshButtonEnabled(true);
                 }
-
-
+                onListLoaded(infoList);
             }
         }, new MVC.Model.ModelErrorListener() {
             @Override
