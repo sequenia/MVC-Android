@@ -42,7 +42,7 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
     }
 
     @Override
-    public void loadList() {
+    public void loadData() {
         getView().setRefreshButtonEnabled(false);
         infoModel.getInfoList(tryIndex, new InfoModel.InfoListListener() {
             @Override
@@ -51,7 +51,7 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
                 if(isViewAttached()) {
                     getView().setRefreshButtonEnabled(true);
                 }
-                onListLoaded(infoList);
+                onDataLoaded(infoList);
             }
         }, new MVC.Model.ModelErrorListener() {
             @Override
@@ -61,19 +61,19 @@ public class InfoListController<T extends InfoListView> extends SimpleListContro
                     getView().setRefreshButtonEnabled(true);
                     getView().showMessage("Ошибка");
                 }
-                onListLoadingError();
+                onDataLoadingError();
             }
         });
     }
 
     @Override
-    public void showList(List<Info> items) {
-        getView().setList(items);
+    public void showData(List<Info> data) {
+        getView().showInfoList(data);
     }
 
     @Override
-    public void setListVisibility(boolean visibility) {
-        getView().setListVisibility(visibility);
+    public void setContentVisibility(boolean visibility) {
+        getView().setContentVisibility(visibility);
     }
 
     @Override

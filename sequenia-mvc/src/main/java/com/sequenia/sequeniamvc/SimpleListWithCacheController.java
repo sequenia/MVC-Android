@@ -12,16 +12,4 @@ public abstract class SimpleListWithCacheController<O, T extends MVC.View> exten
     protected boolean dataIsEmpty() {
         return data != null && data.size() == 0;
     }
-
-    @Override
-    public void onDataFromCacheLoaded(List<O> cachedData) {
-        dataFromCacheLoaded = true;
-        if(data != null && data.size() == 0){
-            data = null;
-        } else {
-            data = cachedData;
-        }
-        showDataOnScreen();
-        loadDataIfNotLoading();
-    }
 }

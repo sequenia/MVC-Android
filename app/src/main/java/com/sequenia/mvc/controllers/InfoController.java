@@ -23,6 +23,13 @@ public class InfoController extends SimpleDataController<Info, InfoView> {
     }
 
     @Override
+    public void onTakeView(InfoView view, boolean firstTime) {
+        super.onTakeView(view, firstTime);
+
+        getView().setRefreshButtonEnabled(!isLoading());
+    }
+
+    @Override
     public void loadData() {
         getView().setRefreshButtonEnabled(false);
 

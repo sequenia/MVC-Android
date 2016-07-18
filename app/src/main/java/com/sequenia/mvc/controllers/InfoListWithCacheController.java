@@ -5,7 +5,7 @@ import com.sequenia.mvc.models.TestInfoModel;
 import com.sequenia.mvc.objects.Info;
 import com.sequenia.mvc.views.InfoListView;
 import com.sequenia.sequeniamvc.MVC;
-import com.sequenia.sequeniamvc.SimpleListWithCacheControllerDeprecated;
+import com.sequenia.sequeniamvc.SimpleListWithCacheController;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by chybakut2004 on 15.07.16.
  */
 
-public class InfoListWithCacheController<T extends InfoListView> extends SimpleListWithCacheControllerDeprecated<Info, T> {
+public class InfoListWithCacheController<T extends InfoListView> extends SimpleListWithCacheController<Info, T> {
 
     private InfoModel infoModel;
     private int tryIndex;
@@ -33,7 +33,7 @@ public class InfoListWithCacheController<T extends InfoListView> extends SimpleL
     }
 
     @Override
-    public void loadList() {
+    public void loadData() {
         getView().setRefreshButtonEnabled(false);
         infoModel.getInfoList(tryIndex, new InfoModel.InfoListListener() {
             @Override
@@ -42,7 +42,7 @@ public class InfoListWithCacheController<T extends InfoListView> extends SimpleL
                 if(isViewAttached()) {
                     getView().setRefreshButtonEnabled(true);
                 }
-                onListLoaded(infoList);
+                onDataLoaded(infoList);
             }
         }, new MVC.Model.ModelErrorListener() {
             @Override
@@ -52,14 +52,13 @@ public class InfoListWithCacheController<T extends InfoListView> extends SimpleL
                     getView().setRefreshButtonEnabled(true);
                     getView().showMessage("Ошибка");
                 }
-                onListLoadingError();
+                onDataLoadingError();
             }
         });
     }
 
-
     @Override
-    public void loadListFromCache() {
+    public void loadDataFromCache() {
         getView().setRefreshButtonEnabled(false);
         infoModel.getInfoListFromCache(new InfoModel.InfoListListener() {
             @Override
@@ -67,19 +66,19 @@ public class InfoListWithCacheController<T extends InfoListView> extends SimpleL
                 if(isViewAttached()) {
                     getView().setRefreshButtonEnabled(true);
                 }
-                onListFromCacheLoaded(infoList);
+                onDataFromCacheLoaded(infoList);
             }
         });
     }
 
     @Override
-    public void showList(List<Info> items) {
-        getView().setList(items);
+    public void showData(List<Info> data) {
+        getView().showInfoList(data);
     }
 
     @Override
-    public void setListVisibility(boolean visibility) {
-        getView().setListVisibility(visibility);
+    public void setContentVisibility(boolean visibility) {
+        getView().setContentVisibility(visibility);
     }
 
     @Override

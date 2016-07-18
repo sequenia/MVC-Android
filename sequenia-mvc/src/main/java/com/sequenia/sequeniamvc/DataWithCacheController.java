@@ -13,6 +13,4 @@ public interface DataWithCacheController<O, T extends MVC.View> extends DataCont
     void onDataFromCacheLoaded(O cachedData);
 
     boolean dataFromCacheLoaded();
-
-    boolean cachedDataIsEmpty(O cachedData);
 }

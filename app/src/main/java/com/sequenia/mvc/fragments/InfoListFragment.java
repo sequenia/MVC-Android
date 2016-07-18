@@ -14,7 +14,8 @@ import com.sequenia.mvc.R;
 import com.sequenia.mvc.controllers.InfoListController;
 import com.sequenia.mvc.objects.Info;
 import com.sequenia.mvc.views.InfoListView;
-import com.sequenia.sequeniamvc.ListController;
+import com.sequenia.sequeniamvc.DataController;
+import com.sequenia.sequeniamvc.SimpleListController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class InfoListFragment extends AppFragment implements InfoListView {
 
     private ListAdapter adapter;       // Адаптер для отображения элементов
 
-    private ListController<Info, InfoListView> controller;
+    private DataController<List<Info>, InfoListView> controller;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class InfoListFragment extends AppFragment implements InfoListView {
         controller = createController();
     }
 
-    protected ListController<Info, InfoListView> createController() {
+    protected DataController<List<Info>, InfoListView> createController() {
         return new InfoListController<>();
     }
 
@@ -76,7 +77,7 @@ public class InfoListFragment extends AppFragment implements InfoListView {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.loadData(true);
+                controller.loadData(true, true);
             }
         });
 
@@ -93,13 +94,13 @@ public class InfoListFragment extends AppFragment implements InfoListView {
     }
 
     @Override
-    public void setList(List<Info> items) {
-        adapter.setItems(items);
+    public void showInfoList(List<Info> infoList) {
+        adapter.setItems(infoList);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void setListVisibility(boolean visibility) {
+    public void setContentVisibility(boolean visibility) {
         recyclerView.setVisibility(visibility ? View.VISIBLE : View.GONE);
     }
 
