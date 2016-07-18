@@ -7,10 +7,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sequenia.mvc.R;
-import com.sequenia.mvc.fragments.InfoListFragment;
 import com.sequenia.mvc.fragments.InfoListWithCacheFragment;
 
 /**
+ * Экран со списком, который закеширован в памяти устройства
+ *
  * Created by chybakut2004 on 15.07.16.
  */
 
