@@ -26,10 +26,10 @@ public interface InfoView extends AppView {
      */
     void showInfo(Info info);
 
-    /**
-     * Скрывает всю информацию
-     */
-    void hideInfo();
+    void setContentVisibility(boolean visibility);
+    void setLoadingVisibility(boolean visibility);
+    void setEmptyScreenVisibility(boolean visibility);
+
 
     /**
      * Задает активность кнопки обновить

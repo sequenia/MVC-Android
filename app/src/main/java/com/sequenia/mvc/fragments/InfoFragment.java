@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sequenia.mvc.controllers.InfoController;
 import com.sequenia.mvc.objects.Info;
 import com.sequenia.mvc.views.InfoView;
-import com.sequenia.mvc.controllers.MainViewController;
 import com.sequenia.mvc.R;
 
 /**
@@ -42,7 +42,7 @@ public class InfoFragment extends AppFragment implements InfoView {
     private Button refreshButton; // Кнопка обновления
 
     // Контроллер, управляющий экраном
-    private MainViewController controller;
+    private InfoController controller;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class InfoFragment extends AppFragment implements InfoView {
         setRetainInstance(true);
 
         // Контроллер создаем 1 раз за жизнь экрана
-        controller = new MainViewController();
+        controller = new InfoController();
     }
 
     @Nullable
@@ -71,7 +71,7 @@ public class InfoFragment extends AppFragment implements InfoView {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.getInfo();
+                controller.loadData(true, false);
             }
         });
 
@@ -92,24 +92,27 @@ public class InfoFragment extends AppFragment implements InfoView {
 
     @Override
     public void showInfo(Info info) {
-        // Если пришли пустые данные - показываем соответствуюший экран.
-        // Если данные есть - отображаем.
-        if(info == null) {
-            content.setVisibility(View.GONE);
-            emptyScreen.setVisibility(View.VISIBLE);
-        } else {
-            content.setVisibility(View.VISIBLE);
-            emptyScreen.setVisibility(View.GONE);
+        firstNameTextView.setText(info.getFirstName());
+        lastNameTextView.setText(info.getLastName());
+    }
 
-            firstNameTextView.setText(info.getFirstName());
-            lastNameTextView.setText(info.getLastName());
+    @Override
+    public void setContentVisibility(boolean visibility) {
+        content.setVisibility(visibility ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setLoadingVisibility(boolean visibility) {
+        if(visibility) {
+            showLoadingDialog("Загрузка");
+        } else {
+            hideLoadingDialog();
         }
     }
 
     @Override
-    public void hideInfo() {
-        content.setVisibility(View.GONE);
-        emptyScreen.setVisibility(View.GONE);
+    public void setEmptyScreenVisibility(boolean visibility) {
+        emptyScreen.setVisibility(visibility ? View.VISIBLE : View.GONE);
     }
 
     @Override

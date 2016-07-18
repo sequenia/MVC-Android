@@ -3,55 +3,25 @@ package com.sequenia.sequeniamvc;
 import java.util.List;
 
 /**
- * Реализация контроллера для списка с кешированием
- *
- * Created by chybakut2004 on 15.07.16.
+ * Created by chybakut2004 on 17.07.16.
  */
 
-public abstract class SimpleListWithCacheController<O, T extends MVC.View> extends SimpleListController<O, T>
-            implements ListWithCacheController<O, T> {
+public abstract class SimpleListWithCacheController<O, T extends MVC.View> extends SimpleDataWithCacheController<List<O>, T> {
 
-    private boolean dataFromCacheLoaded;
-
-    public SimpleListWithCacheController() {
-        this.dataFromCacheLoaded = false;
+    @Override
+    protected boolean dataIsEmpty() {
+        return data != null && data.size() == 0;
     }
 
     @Override
-    protected void showDataOnTakeView() {
-        if(createdFirstTime()) {
-            // Если экран создан первый раз - нужно взять данные из кеша.
-            // Перед этим нужно показать индикатор загрузки.
-            showLoading(true);
-            loadListFromCache();
-        } else {
-            // Если экран пересоздан, нужно просто отобразить их, как делалось раньше.
-            // Однако, если данные из кеша еще не получены - нужно показать загрузку
-            if(dataFromCacheLoaded) {
-                super.showDataOnTakeView();
-            } else {
-                showLoading(true);
-            }
-        }
-    }
-
-    @Override
-    public void onListFromCacheLoaded(List<O> cachedList) {
-        // После загрузки данных из кеша нужно запомнить, что они загружены,
-        // сохранить список,
-        // отобразить его,
-        // И начать скачивать новые данные
+    public void onDataFromCacheLoaded(List<O> cachedData) {
         dataFromCacheLoaded = true;
-        if(cachedList != null && cachedList.size() == 0){
-            items = null;
+        if(data != null && data.size() == 0){
+            data = null;
         } else {
-            items = cachedList;
+            data = cachedData;
         }
-        super.showDataOnTakeView();
-    }
-
-    @Override
-    public boolean dataFromCacheLoaded() {
-        return dataFromCacheLoaded;
+        showDataOnScreen();
+        loadDataIfNotLoading();
     }
 }

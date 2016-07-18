@@ -5,7 +5,7 @@ import com.sequenia.mvc.models.TestInfoModel;
 import com.sequenia.mvc.objects.Info;
 import com.sequenia.mvc.views.InfoListView;
 import com.sequenia.sequeniamvc.MVC;
-import com.sequenia.sequeniamvc.SimpleListWithCacheController;
+import com.sequenia.sequeniamvc.SimpleListWithCacheControllerDeprecated;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by chybakut2004 on 15.07.16.
  */
 
-public class InfoListWithCacheController<T extends InfoListView> extends SimpleListWithCacheController<Info, T> {
+public class InfoListWithCacheController<T extends InfoListView> extends SimpleListWithCacheControllerDeprecated<Info, T> {
 
     private InfoModel infoModel;
     private int tryIndex;
