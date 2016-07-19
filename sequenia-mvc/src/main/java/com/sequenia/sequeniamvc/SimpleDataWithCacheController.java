@@ -44,12 +44,21 @@ public abstract class SimpleDataWithCacheController<O, T extends MVC.View> exten
         // и запомнить данные.
         dataFromCacheLoaded = true;
         data = cachedData;
-        // Если данные из кеша достались - указываем, что данные хотя бы раз загружены.
-        // При этом загрузка данных начнется в фоне.
-        onceLoaded = !dataIsNull() && !dataIsEmpty();
         // После этого - отобразить их и начать фоновую загрузку
         showDataOnScreen();
         loadDataIfNotLoading();
+    }
+
+    @Override
+    protected boolean hideContentOnTakeViewLoading() {
+        // Во время загрузки при захвате View контент нужно скрывать,
+        // если данные еще не загрузились и из кеша пришла пустота
+        return !onceLoaded && (dataIsEmpty() || dataIsNull());
+    }
+
+    @Override
+    protected boolean showLoadingOnTakeViewLoading() {
+        return !onceLoaded && (dataIsEmpty() || dataIsNull());
     }
 
     @Override

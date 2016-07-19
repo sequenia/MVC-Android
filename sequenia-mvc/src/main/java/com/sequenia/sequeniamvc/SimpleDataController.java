@@ -92,12 +92,49 @@ public abstract class SimpleDataController<O, T extends MVC.View> extends Contro
                 }
             }
         } else {
-            // Загрузка данных.
-            // Показывать индикатор загрузки нужно только в первый раз,
-            // так как загрузка повторно должна идти в фоне.
-            // Скрыть контент при загрузке нужно только при первой загрузке.
-            loadData(!onceLoaded, !onceLoaded);
+            // При захвате экрана данные нужно загрузить если:
+            // - Экран создался первый раз или
+            // - экран пересоздался, но данные не загружены или
+            // - указано, что при пересоздании нужно заново загружать данные
+            if(loadDataOnTakeView()) {
+                // Показывать индикатор загрузки нужно только в первый раз,
+                // так как загрузка повторно должна идти в фоне.
+                // Скрыть контент при загрузке нужно только при первой загрузке.
+                loadData(showLoadingOnTakeViewLoading(), hideContentOnTakeViewLoading());
+            }
         }
+    }
+
+    /**
+     * @return true, если нужно загрузить данные при захвате View.
+     */
+    protected boolean loadDataOnTakeView() {
+        return createdFirstTime() || !createdFirstTime() && (!onceLoaded || loadDataOnRecreation());
+    }
+
+    /**
+     * @return true, если нужно загружать данные заново при смене ориентации
+     */
+    protected boolean loadDataOnRecreation() {
+        return false;
+    }
+
+    /**
+     * @return указывает, нужно ли скрывать контент во время загрузки, которая начинается при захвате View
+     */
+    protected boolean hideContentOnTakeViewLoading() {
+        // Показывать нужно только если данные еще не загружены.
+        // Если загружены, загрузка идет в фоне.
+        return !onceLoaded;
+    }
+
+    /**
+     * @return указывает, нужно ли показывать индикатор загрузки, которая начинается при захвате View
+     */
+    protected boolean showLoadingOnTakeViewLoading() {
+        // Показывать нужно, если данные не загружены.
+        // Если загружены, то данные должны загружаться в фоне.
+        return !onceLoaded;
     }
 
     @Override
