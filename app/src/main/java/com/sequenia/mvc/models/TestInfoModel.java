@@ -74,4 +74,20 @@ public class TestInfoModel implements InfoModel {
             }
         }, 5000);
     }
+
+    @Override
+    public void getInfoPage(int tryIndex, final int page, final InfoListListener infoListListener, MVC.Model.ModelErrorListener errorListener) {
+        System.out.println("PAGE " + page);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Генерация данных или ошибки в зависимости от попытки.
+                List<Info> infoList = new ArrayList<>();
+                for(int i = page * 50; i < page * 50 + 50; i++) {
+                    infoList.add(new Info("Имя " + i, "Фамилия " + i));
+                }
+                infoListListener.onInfoListLoaded(infoList);
+            }
+        }, 5000);
+    }
 }

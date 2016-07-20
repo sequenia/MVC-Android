@@ -17,25 +17,10 @@ import com.sequenia.mvc.fragments.InfoFragment;
  * Created by chybakut2004 on 15.07.16.
  */
 
-public class InfoActivity extends AppCompatActivity {
-
-    private static final String FRAGMENT_TAG = "Fragment";
+public class InfoActivity extends SampleActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_with_fragment);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        Fragment fragment = fragmentManager.findFragmentByTag(FRAGMENT_TAG);
-        if(fragment == null) {
-            fragment = new InfoFragment();
-            fragmentManager
-                    .beginTransaction()
-                    .add(R.id.frame_layout, fragment, FRAGMENT_TAG)
-                    .commit();
-        }
+    public Fragment createFragment() {
+        return new InfoFragment();
     }
 }

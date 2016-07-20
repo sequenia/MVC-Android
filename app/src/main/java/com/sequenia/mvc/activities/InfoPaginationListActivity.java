@@ -7,18 +7,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sequenia.mvc.R;
-import com.sequenia.mvc.fragments.InfoListWithCacheFragment;
+import com.sequenia.mvc.fragments.InfoFragment;
+import com.sequenia.mvc.fragments.InfoPaginationListFragment;
 
 /**
- * Экран со списком, который закеширован в памяти устройства
- *
- * Created by chybakut2004 on 15.07.16.
+ * Created by chybakut2004 on 20.07.16.
  */
 
-public class InfoListWithCacheActivity extends SampleActivity {
+public class InfoPaginationListActivity extends SampleActivity {
 
     @Override
     public Fragment createFragment() {
-        return new InfoListWithCacheFragment();
+        return new InfoPaginationListFragment();
     }
 }

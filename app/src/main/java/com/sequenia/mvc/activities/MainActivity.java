@@ -49,5 +49,14 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        Button pagination = (Button) findViewById(R.id.pagination);
+        if(pagination != null) {
+            pagination.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(MainActivity.this, InfoPaginationListActivity.class));
+                }
+            });
+        }
     }
 }

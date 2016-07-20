@@ -35,7 +35,7 @@ public abstract class SimpleDataController<O, T extends MVC.View> extends Contro
     }
 
     protected void showDataAndStartLoading() {
-        showDataOnScreen();       // Показ имеющихся данных
+        showDataOnScreen(data);   // Показ имеющихся данных
         loadDataIfNotLoading();   // Загрузка новых данных, если они сейчас не загружаются
     }
 
@@ -51,7 +51,7 @@ public abstract class SimpleDataController<O, T extends MVC.View> extends Contro
     /**
      * Показывает имеющиеся данные на экране
      */
-    protected void showDataOnScreen() {
+    protected void showDataOnScreen(O data) {
         if(isViewAttached()) {
             // Если в данных пусто - показать пустой экран.
             // Если данных нет вообще - скрыть весь контент.
@@ -163,11 +163,15 @@ public abstract class SimpleDataController<O, T extends MVC.View> extends Contro
         // запомнить данные, сохранить, что они загружены
         // и отобразить на экране
         loading = false;
-        this.data = data;
+        saveLoadedData(data);
         onceLoaded = true;
         loadingShown = false;
         contentHided = false;
-        showDataOnScreen();
+        showDataOnScreen(this.data);
+    }
+
+    protected void saveLoadedData(O data) {
+        this.data = data;
     }
 
     @Override

@@ -32,7 +32,7 @@ public abstract class SimpleDataWithCacheController<O, T extends MVC.View> exten
             // Однако если экран пересоздался, и данные из кеша взяты -
             // нужно отобразить данные на экране и начать загрузку новых
             if(dataFromCacheLoaded) {
-                showDataOnScreen();
+                showDataOnScreen(data);
                 loadDataIfNotLoading();
             }
         }
@@ -45,7 +45,7 @@ public abstract class SimpleDataWithCacheController<O, T extends MVC.View> exten
         dataFromCacheLoaded = true;
         data = cachedData;
         // После этого - отобразить их и начать фоновую загрузку
-        showDataOnScreen();
+        showDataOnScreen(data);
         loadDataIfNotLoading();
     }
 

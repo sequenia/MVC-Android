@@ -35,6 +35,15 @@ public interface InfoModel {
      */
     void getInfoListFromCache(InfoListListener infoListListener);
 
+    /**
+     * Загрузка страницы с информацией
+     * @param tryIndex номер попытки
+     * @param page номер страницы
+     * @param infoListListener успех
+     * @param errorListener ошибка
+     */
+    void getInfoPage(int tryIndex, int page, InfoListListener infoListListener, MVC.Model.ModelErrorListener errorListener);
+
     interface InfoListListener {
         void onInfoListLoaded(List<Info> infoList);
     }
