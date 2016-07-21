@@ -15,4 +15,6 @@ public interface InfoPaginationListView extends InfoListView {
     void bindPagination();
 
     void unbindPagination();
+
+    void setPaginationLoadingVisibility(boolean visibility);
 }

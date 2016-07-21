@@ -88,6 +88,6 @@ public class TestInfoModel implements InfoModel {
                 }
                 infoListListener.onInfoListLoaded(infoList);
             }
-        }, 5000);
+        }, 3000);
     }
 }

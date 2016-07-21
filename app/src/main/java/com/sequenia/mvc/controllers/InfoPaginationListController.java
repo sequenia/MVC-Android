@@ -45,14 +45,18 @@ public class InfoPaginationListController<T extends InfoPaginationListView>
         infoModel.getInfoPage(0, page, new InfoModel.InfoListListener() {
             @Override
             public void onInfoListLoaded(List<Info> infoList) {
-                getView().setRefreshButtonEnabled(true);
+                if(isViewAttached()) {
+                    getView().setRefreshButtonEnabled(true);
+                }
                 onDataLoaded(infoList);
             }
         }, new MVC.Model.ModelErrorListener() {
             @Override
             public void onError(MVC.Model.ModelError error) {
-                getView().setRefreshButtonEnabled(true);
-                getView().showMessage("Ошибка");
+                if(isViewAttached()) {
+                    getView().setRefreshButtonEnabled(true);
+                    getView().showMessage("Ошибка");
+                }
             }
         });
     }
@@ -68,6 +72,11 @@ public class InfoPaginationListController<T extends InfoPaginationListView>
     }
 
     @Override
+    public boolean hasMore() {
+        return currentPage < 3;
+    }
+
+    @Override
     public void bindPagination() {
         getView().bindPagination();
     }
@@ -79,7 +88,7 @@ public class InfoPaginationListController<T extends InfoPaginationListView>
 
     @Override
     public void setPageLoadingVisibility(boolean visibility) {
-
+        getView().setPaginationLoadingVisibility(visibility);
     }
 
     @Override

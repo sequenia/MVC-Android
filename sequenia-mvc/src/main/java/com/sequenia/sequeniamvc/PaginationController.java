@@ -59,5 +59,5 @@ public interface PaginationController<I, O, T extends MVC.View> extends DataCont
 
     void loadData(boolean showLoading, boolean hideContent, boolean clearList);
 
-    I getCurrentPage();
+    boolean hasMore();
 }

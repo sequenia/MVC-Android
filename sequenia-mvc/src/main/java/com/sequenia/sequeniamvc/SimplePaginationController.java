@@ -68,10 +68,6 @@ public abstract class SimplePaginationController<I, O, T extends MVC.View> exten
         return createdFirstTime();
     }
 
-    @Override
-    public I getCurrentPage() {
-        return currentPage;
-    }
 
     @Override
     public void setLoadingVisibility(boolean visibility) {

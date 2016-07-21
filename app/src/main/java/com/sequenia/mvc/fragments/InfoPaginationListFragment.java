@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.paginate.Paginate;
-import com.sequenia.mvc.controllers.InfoListWithCacheController;
 import com.sequenia.mvc.controllers.InfoPaginationListController;
 import com.sequenia.mvc.objects.Info;
-import com.sequenia.mvc.views.InfoListView;
 import com.sequenia.mvc.views.InfoPaginationListView;
-import com.sequenia.sequeniamvc.DataController;
 
 import java.util.List;
 
@@ -78,7 +75,7 @@ public class InfoPaginationListFragment extends InfoListFragmentWithoutLogic imp
 
             @Override
             public boolean hasLoadedAllItems() {
-                return false;
+                return !controller.hasMore();
             }
         }).setLoadingTriggerThreshold(10)
         .addLoadingListItem(true)
@@ -89,6 +86,13 @@ public class InfoPaginationListFragment extends InfoListFragmentWithoutLogic imp
     public void unbindPagination() {
         if(paginate != null) {
             paginate.unbind();
+        }
+    }
+
+    @Override
+    public void setPaginationLoadingVisibility(boolean visibility) {
+        if(paginate != null) {
+            paginate.setHasMoreDataToLoad(visibility);
         }
     }
 }
