@@ -34,7 +34,9 @@ public class InfoListWithCacheController<T extends InfoListView> extends SimpleL
 
     @Override
     public void loadData() {
-        getView().setRefreshButtonEnabled(false);
+        if(isViewAttached()) {
+            getView().setRefreshButtonEnabled(false);
+        }
         infoModel.getInfoList(tryIndex, new InfoModel.InfoListListener() {
             @Override
             public void onInfoListLoaded(List<Info> infoList) {
