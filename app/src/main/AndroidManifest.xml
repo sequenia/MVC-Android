@@ -29,6 +29,9 @@
         <activity android:name=".activities.InfoPaginationListActivity">
         </activity>
 
+        <activity android:name=".activities.InfoPaginationWithCacheActivity">
+        </activity>
+
     </application>
 
 </manifest>

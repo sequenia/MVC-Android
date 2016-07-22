@@ -43,10 +43,14 @@ public abstract class SimpleDataWithCacheController<O, T extends MVC.View> exten
         // Если данные из кеша загружены - нужно это запомнить,
         // и запомнить данные.
         dataFromCacheLoaded = true;
-        data = cachedData;
+        saveDataOnCacheLoaded(cachedData);
         // После этого - отобразить их и начать фоновую загрузку
         showDataOnScreen(data);
         loadDataIfNotLoading();
+    }
+
+    protected void saveDataOnCacheLoaded(O loadedCachedData) {
+        data = loadedCachedData;
     }
 
     @Override

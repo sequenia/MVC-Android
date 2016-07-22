@@ -2,6 +2,7 @@ package com.sequenia.mvc.activities;
 
 import android.support.v4.app.Fragment;
 
+import com.sequenia.mvc.fragments.InfoListFragment;
 import com.sequenia.mvc.fragments.InfoListFragmentWithoutLogic;
 
 /**
@@ -16,6 +17,6 @@ public class InfoListActivity extends SampleActivity {
 
     @Override
     public Fragment createFragment() {
-        return new InfoListFragmentWithoutLogic();
+        return new InfoListFragment();
     }
 }

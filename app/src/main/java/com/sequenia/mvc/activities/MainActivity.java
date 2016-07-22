@@ -58,5 +58,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        Button paginationWithCache = (Button) findViewById(R.id.pagination_with_cache);
+        if(paginationWithCache != null) {
+            paginationWithCache.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(MainActivity.this, InfoPaginationWithCacheActivity.class));
+                }
+            });
+        }
     }
 }
